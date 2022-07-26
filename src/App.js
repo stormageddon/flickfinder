@@ -1,12 +1,23 @@
 import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 import MovieList from './MovieList.js';
-import axios from "axios"
+import GenrePicker from './GenrePicker.js';
 
 function App() {
-  console.log("TEST TEST TEST")
-  axios.get('https://api.themoviedb.org/3/discover/movie\?api_key\=652647989a10261ed3c342b6d54f9f21\&language\=en-US\&include_adult\=true\&include_video\=false\&page\=1\&with_genres\=35%7C878\&with_watch_monetization_types\=flatrate')
-  .then((results) => { console.log(results)})
+  const state = {
+    selectedGenres: []
+  }
+
+  function handleCheckboxChanged(event) {
+    if (state.selectedGenres.filter((id) => id == event.target.id).length == 0) {
+      state.selectedGenres.push(event.target.id)
+    }
+    else {
+      state.selectedGenres = state.selectedGenres.filter((id) => id != event.target.id)
+    }
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -23,7 +34,8 @@ function App() {
           Learn React
         </a>
       </header>
-      <MovieList />
+      <GenrePicker onChange={handleCheckboxChanged}/>
+      <MovieList state={state}/>
     </div>
   );
 }

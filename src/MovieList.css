@@ -1,0 +1,11 @@
+.movie-card {
+    width: 400px;
+    height: 400px;
+    padding: 8em;
+    display: inline-block;
+}
+
+.thumbnail {
+    max-width: 100%;
+    height: auto;
+}
